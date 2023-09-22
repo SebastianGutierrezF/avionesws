@@ -13,13 +13,13 @@ switch ($_GET['option']) {
         echo json_encode($avion->getAvion($body));
         break;
     case 'addAvion':
-        echo $avion->addAvion($body);
+        echo json_encode($avion->addAvion($body));
         break;
     case 'editAvion':
-        echo $avion->editAvion($body);
+        echo json_encode($avion->editAvion($body));
         break;
     case 'deleteAvion':
-        echo $avion->deleteAvion($body);
+        echo json_encode($avion->deleteAvion($body));
         break;
     case 'getMarcas':
         echo json_encode($avion->getMarcas());

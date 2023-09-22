@@ -22,7 +22,7 @@ class Avion extends Connection {
         $query = $db->prepare('INSERT INTO avion(modelo, anio, marca, imgA) VALUES(?, ?, ?, ?);');
         $query->bindValue(1, $body->modelo);
         $query->bindValue(2, $body->anio);
-        $query->bindValue(3, $body->marca);
+        $query->bindValue(3, (int) $body->marca);
         $query->bindValue(4, $body->img);
         return $query->execute();
     }
