@@ -12,13 +12,13 @@ class Auth extends Connection {
         $query->bindValue(1, $body->correoU);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_OBJ);
-        $response['status'] = false;
+        $response = [];
         if (password_verify($body->passU, $result->passU)) {
             $response['status'] = true;
             $response['nombreU'] = self::makeName($result->nombresU, $result->apellidoUPaterno);
             $response['adminU'] = $result->adminU;
             $response['token'] = parent::encodeJWT($result->idU);
-        }
+        } else { $response['status'] = false; }
         return $response;
     }
 
