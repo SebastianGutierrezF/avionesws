@@ -4,7 +4,7 @@ require_once '../models/avion.php';
 $body = json_decode((file_get_contents('php://input', true)));
 $avion = new Avion();
 
-switch ($_GET['options']) {
+switch ($_GET['option']) {
     case 'getAviones':
         echo json_encode($avion->getAviones());
         break;
