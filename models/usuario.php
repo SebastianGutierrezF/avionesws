@@ -16,11 +16,7 @@ class Usuario extends Connection {
         $query->bindValue(3, $body->apellidoUMaterno);        
         $query->bindValue(4, $body->correoU);
         $query->bindValue(5, password_hash($body->passU, PASSWORD_DEFAULT));
-        $response['status'] = false;
-        if ($query->execute()) {
-            $response = true;
-        }
-        return $response;
+        return $query->execute();
     }
 }
 ?>
