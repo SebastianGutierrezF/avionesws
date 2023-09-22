@@ -1,10 +1,8 @@
 <?php
 require_once '../connection.php';
-header("Access-Control-Allow-Origin: *");
-header("Content-type: application/json; charset=utf-8");
-header("Access-Control-Allow-Headers: *");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+
 class Auth extends Connection {
+
     function login($body) {
         $db = parent::db();
         $query = 'SELECT * FROM usuario WHERE correoU = ?;';

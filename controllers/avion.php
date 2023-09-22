@@ -1,5 +1,6 @@
 <?php
 require_once '../models/avion.php';
+require_once '../config/headers.php';
 
 $body = json_decode((file_get_contents('php://input', true)));
 $avion = new Avion();
