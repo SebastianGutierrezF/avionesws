@@ -9,7 +9,11 @@ switch ($_GET['option']) {
     case 'register':
         echo json_encode($usuario->register($body));
         break;
-    case 'pswReset':
+    case 'accountExists':
+        echo json_encode($usuario->accountExists($body));
+        break;
+    case 'changePsw':
+        echo json_encode($usuario->changePsw($body));
         break;
     
 }

@@ -9,8 +9,6 @@ switch ($_GET['option']) {
     case 'login':
         echo json_encode($auth->login($body));
         break;
-    case 'pswReset':
-        break;
     
 }
 ?>

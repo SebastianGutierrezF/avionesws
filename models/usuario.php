@@ -14,5 +14,23 @@ class Usuario extends Connection {
         $query->bindValue(5, password_hash($body->passU, PASSWORD_DEFAULT));
         return $query->execute();
     }
+    
+    function accountExists($body) {
+        $db = parent::db();
+        $query = 'SELECT * FROM usuario WHERE correoU = ?;';
+        $query = $db->prepare($query);
+        $query->bindValue(1, $body->correoU);
+        return $query->execute();
+    }
+    
+    function changePsw($body) {
+        $db = parent::db();
+        $query = 'UPDATE usuario SET passU = ? WHERE correoU = ?;';
+        $query = $db->prepare($query);
+        $query->bindValue(1, password_hash($body->passU, PASSWORD_DEFAULT));
+        $query->bindValue(2, $body->correoU);
+        return $query->execute();
+
+    }
 }
 ?>
