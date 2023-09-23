@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 
 class Connection
 {
-    private $link;
+    private PDO $link;
 
     // Getter function to get link to the db
     protected function db() {

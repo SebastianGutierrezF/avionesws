@@ -20,7 +20,8 @@ class Usuario extends Connection {
         $query = 'SELECT * FROM usuario WHERE correoU = ?;';
         $query = $db->prepare($query);
         $query->bindValue(1, $body->correoU);
-        return $query->execute();
+        $query->execute();
+        return ($query->rowCount() > 0);
     }
     
     function changePsw($body) {
@@ -30,7 +31,6 @@ class Usuario extends Connection {
         $query->bindValue(1, password_hash($body->passU, PASSWORD_DEFAULT));
         $query->bindValue(2, $body->correoU);
         return $query->execute();
-
     }
 }
 ?>
