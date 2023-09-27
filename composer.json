@@ -7,5 +7,8 @@
             "main\\":"./config",
             "models\\":"./models"
         }
+    },
+    "config": {
+        "vendor-dir": "./vendor"
     }
 }
