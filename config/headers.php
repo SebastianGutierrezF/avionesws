@@ -1,4 +1,6 @@
 <?php
+namespace main;
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
@@ -16,4 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
+
+$HEADERS = getallheaders();
+$BODY = json_decode(file_get_contents("php://input"));
+$URL_PARAMS = (object) $_GET;
+$PARAMS = [];
+if(isset($URL_PARAMS->params)){
+    $PARAMS = json_decode(urldecode($URL_PARAMS->params));
+}
+$METHOD = $_SERVER['REQUEST_METHOD'];
 ?>
