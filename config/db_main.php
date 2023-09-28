@@ -29,13 +29,13 @@ class db_main
             $stmt->execute($obj->params);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             if ($stmt->fetchColumn()) {
-                throw new Exception("query_error");
+                $array = false;
+            } else {
+                $array = true;
             }
             $db = null;
-            $array = ["error" => false, "msg" => "querys_executed"];
-
         } catch (Exception $e) {
-            $array = ["error" => true, "msg" => $e->getMessage()];
+            $array = $e->getMessage();
         }
         return $array;
     }
@@ -79,27 +79,22 @@ class db_main
         Método para hacer transacciones con la estructura PDO
         (INSERT, UPDATE, DELETE)
      **/
-    public static function save_transaction_PDO($querys)
+    public static function save_transaction_PDO($objs)
     {
         try {
             $db = self::connect();
             $db->beginTransaction();
-            foreach ($querys as $obj) {
+            foreach ($objs as $obj) {
                 $stmt = $db->prepare($obj->query);
                 $stmt->execute($obj->params);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $array[] = $stmt->fetchColumn();
-                if (in_array(true, $array)) {
-                    throw new Exception("error_in_one_of_the_queries");
-                }
-
             }
-            $db->commit();
-            $array = ["error" => false, "msg" => "querys_executed!"];
+            $result = $db->commit();
         } catch (Exception $e) {
-            $array = ["error" => true, "msg" => $e->getMessage()];
+            $result = $e->getMessage();
         }
-        return $array;
+        return $result;
     }
 
 }
