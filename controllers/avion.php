@@ -1,7 +1,7 @@
 <?php
-require_once '../models/avion.php';
 require_once '../config/headers.php';
-use main\custom_exceptions as exc;
+require "../vendor/autoload.php";
+
 use models\avion;
 
 switch ($URL_PARAMS->option) {
