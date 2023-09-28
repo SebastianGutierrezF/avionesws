@@ -1,20 +1,18 @@
 <?php
 require_once '../models/usuario.php';
 require_once '../config/headers.php';
-
-$body = json_decode((file_get_contents('php://input', true)));
-$usuario = new Usuario();
+use main\custom_exceptions as exc;
+use models\usuario;
 
 switch ($_GET['option']) {
     case 'register':
-        echo json_encode($usuario->register($body));
+        echo json_encode(usuario::register($BODY));
         break;
     case 'accountExists':
-        echo json_encode($usuario->accountExists($body));
+        echo json_encode(usuario::accountExists($BODY));
         break;
     case 'changePsw':
-        echo json_encode($usuario->changePsw($body));
+        echo json_encode(usuario::changePsw($BODY));
         break;
-    
 }
 ?>

@@ -1,27 +1,22 @@
 <?php
 require_once '../models/avion.php';
 require_once '../config/headers.php';
+use main\custom_exceptions as exc;
+use models\avion;
 
-$body = json_decode((file_get_contents('php://input', true)));
-$avion = new Avion();
-
-switch ($_GET['option']) {
+switch ($URL_PARAMS->option) {
     case 'getAviones':
-        echo json_encode($avion->getAviones());
-        break;
+    case 'getMarcas':
     case 'getAvion':
-        echo json_encode($avion->getAvion($body));
+        echo json_encode(avion::{$URL_PARAMS->option}($PARAMS));
         break;
     case 'addAvion':
-        echo json_encode($avion->addAvion($body));
+        echo json_encode(avion::addAvion($BODY));
         break;
     case 'editAvion':
-        echo json_encode($avion->editAvion($body));
+        echo json_encode(avion::editAvion($BODY));
         break;
     case 'deleteAvion':
-        echo json_encode($avion->deleteAvion($body));
-        break;
-    case 'getMarcas':
-        echo json_encode($avion->getMarcas());
+        echo json_encode(avion::deleteAvion($PARAMS));
         break;
 }

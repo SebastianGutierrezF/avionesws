@@ -3,7 +3,7 @@ namespace models;
 use main\db_main as db;
 use main\Token as token;
 
-class Auth {
+class auth {
 
     static function login($body) {
         $sql = (object) [
@@ -14,9 +14,10 @@ class Auth {
         $response = [];
         if (password_verify($body->passU, $result->passU)) {
             $response['status'] = true;
-            $response['nombreU'] = self::makeName($result->nombresU, $result->apellidoUPaterno);
             $response['token'] = token::encodeJWT($result->idU);
+            $response['nombreU'] = self::makeName($result->nombresU, $result->apellidoUPaterno);
             $response['modulos'] = self::getModulos($result->idU);
+            $response['permisos'] = self::getPermissions($result->idU);
         } else { $response['status'] = false; }
         return $response;
     }
